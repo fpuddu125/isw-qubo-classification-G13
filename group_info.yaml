@@ -1,0 +1,10 @@
+group_id: GXX
+students:
+  - matricola: "123456"
+  - matricola: "654321"
+main_llm_used: "*****"
+paid_subscription_used: true/false
+second_llm_used: "*****"
+third_llm_used: ""
+notes: ""
+project_finished: "false"    # Mettere "true" se consegnato

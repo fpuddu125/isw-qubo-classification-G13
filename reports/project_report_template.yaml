@@ -1,0 +1,189 @@
+# ============================================================
+# Template report progetto
+# Classificazione binaria con feature reduction QUBO
+# Formato: YAML
+#
+# Compilare tutti i campi applicabili.
+# Usare null quando un dato non è disponibile.
+# Non inserire qui prompt completi o risposte degli LLM:
+# saranno raccolti in un template separato.
+# Utilizzare l'inglese per le risposte testuali
+# ============================================================
+
+schema_version: "1.0"
+
+group_id: "GXX"
+repository_url: "https://github.com/..."
+submission_date: "YYYY-MM-DD"
+
+students:
+  - student_id: "60/61/XXXXX"        #Matricola completa
+    role_in_project:
+      - "preprocessing"
+      - "feature_selection"
+      - "classification"
+      - "testing"
+      - "documentation"
+      - "gui"
+  - student_id: "60/61/XXXXX"        #Matricola completa
+    role_in_project:
+      - "preprocessing"
+      - "feature_selection"
+      - "classification"
+      - "testing"
+      - "documentation"
+      - "gui"
+
+team_work:
+  work_distribution:
+    design_percent: null
+    preprocessing_percent: null
+    qubo_feature_selection_percent: null
+    classification_percent: null
+    testing_percent: null
+    gui_percent: null
+    documentation_percent: null
+  collaboration_mode:
+    # valori suggeriti: "pair_programming", "divisione_per_moduli", "mista"
+    type: null
+    notes: null
+    remote_collaboration_perc: 0   # Percentuale di lavoro in call (0-100)
+  estimated_total_hours:
+    student_1_hours: null
+    student_2_hours: null
+    total_group_hours: null
+
+initial_context:
+  prior_experience:
+    # valori da usare: "none", "basic", "intermediate", "advanced"
+    python: null
+    pandas_numpy: null
+    scikit_learn: null
+    machine_learning: null
+    classification: null
+    feature_selection: null
+    optimization: null
+    QUBO: null
+    git_github: null
+  initial_confidence:
+    # scala 1-5: 1 = per nulla sicuri, 5 = molto sicuri
+    python_project_development: null
+    qubo_formulation: null
+    machine_learning: null
+    debugging: null
+    validating_llm_outputs: null
+
+design_choices:
+  correlation_computation: null
+  QUBO_optimization_algorithm:
+    algorithm_name: null
+    library_used: null
+    reason_for_choice: null
+  classification_algorithm:
+    algorithm_name: null
+    library_used: null
+    reason_for_choice: null
+  gui_development: null
+  problems_encountered:
+    - problem: null
+      solution: null
+  notes:
+
+llm_usage_summary:
+  # Non inserire prompt o risposte complete: saranno raccolti separatamente.
+  llms_used:    # Inserire un record per ogni LLM usato
+    - name: null
+      version: null
+      paid_subscription: null
+      usage_level_0_to_3:   # valori da 0 (non usato) a 3 (usatissimo)     
+        value: null   
+  phases_where_llm_was_used:
+    requirements_understanding:
+      usage_level_0_to_3: null
+      usefulness_1_to_5: null
+      notes: null
+    preprocessing:
+      usage_level_0_to_3: null
+      usefulness_1_to_5: null
+      notes: null
+    qubo_formulation:
+      usage_level_0_to_3: null
+      usefulness_1_to_5: null
+      notes: null
+    optimizer_selection:
+      usage_level_0_to_3: null
+      usefulness_1_to_5: null
+      notes: null
+    classifier_selection:
+      usage_level_0_to_3: null
+      usefulness_1_to_5: null
+      notes: null
+    debugging:
+      usage_level_0_to_3: null
+      usefulness_1_to_5: null
+      notes: null
+    testing:
+      usage_level_0_to_3: null
+      usefulness_1_to_5: null
+      notes: null
+    documentation:
+      usage_level_0_to_3: null
+      usefulness_1_to_5: null
+      notes: null
+    gui:
+      usage_level_0_to_3: null
+      usefulness_1_to_5: null
+      notes: null
+  estimated_llm_contribution:
+    percent_code_generated_or_suggested_by_llm: null
+    percent_code_accepted_without_major_changes: null
+    percent_documentation_generated_or_suggested_by_llm: null
+  human_verification:
+    # descrivere come il gruppo ha controllato gli output dell'LLM. (yes/partially/no)
+    methods_used:
+      - code_execution: null
+      - automated_tests: null
+      - critical_reading: null
+      - comparison_with_other_llm: null
+    notes: null
+  llm_misleading_outputs:
+    encountered: null  # (yes/partially/no)
+    examples_count: null   # number of cases
+    categories:     # rispondere con: yes/partially/no
+      wrong_python_code: null  
+      wrong_library_usage: null
+      wrong_qubo_formulation: null
+      wrong_ml_methodology: null
+      hallucinated_api_or_function: null
+      other: null      # indicare quale/quali
+    impact_on_project: null   # valori da 0 (nessuno) a 3 (fortissimo)     
+  llm_overall_assessment:  
+    productivity_improvement_1_to_5: null
+    learning_support_1_to_5: null
+    risk_of_overreliance_1_to_5: null
+    trust_in_llm_outputs_1_to_5: null
+    would_use_again: null   # (yes/maybe/no)
+    notes: null
+  most_useful_project_activity: null
+  most_difficult_project_activity: null
+  main_lessons_learned:   # descrivere con una frase per ogni lezione appresa
+    - null
+  main_problems:
+    - problem: null
+      severity_1_to_5: null
+      how_resolved: null
+
+final_results:   # descrivere con una frase per ogni elemento che ritenete di citare
+  what_worked_well:
+    - null
+  what_did_not_work_well:
+    - null
+  main_benefit_of_using_llm: null
+  main_problem_of_using_llm: null
+  surprising_findings:
+    - null
+  limitations_of_the_solution:
+    - null
+  threats_to_validity_from_team_perspective:
+    - null
+
