@@ -1,57 +1,60 @@
 import os
+import json
 import pandas as pd
 import numpy as np
 
-# Percorsi standard del progetto
+# Standardized project paths matching Section 12 outputs structure
 ORIG = "data/input_dataset.csv"
-TRAIN = "outputs/preprocessed_train.csv"
-TEST = "outputs/preprocessed_test.csv"
+NORMALIZED = "outputs/normalized.csv"
+JSON_STATS = "outputs/preprocessing_result.json"
 
 
 def test_output_files_exist():
-    """Verifica che i file preprocessati siano stati generati."""
-    assert os.path.exists(TRAIN), "Train CSV non trovato"
-    assert os.path.exists(TEST), "Test CSV non trovato"
+    """Verify that all required output files have been successfully generated."""
+    assert os.path.exists(NORMALIZED), "Normalized CSV file not found in outputs directory"
+    assert os.path.exists(JSON_STATS), "JSON metrics summary file not found in outputs directory"
 
 
-def test_row_counts_and_no_loss():
-    """Verifica che non ci sia perdita di righe."""
-    orig = pd.read_csv(ORIG)
-    train = pd.read_csv(TRAIN)
-    test = pd.read_csv(TEST)
+def test_json_structure_and_keys():
+    """Verify that the summary metrics structure matches the expected evaluation format keys."""
+    with open(JSON_STATS, "r") as f:
+        data = json.load(f)
 
-    assert len(train) + len(test) == len(orig), \
-        "Il numero di righe train+test non coincide con l'originale"
+    mandatory_keys = [
+        "n_input_features", "n_kept_features", "dataset_size",
+        "dataset_input_time", "dataset_processing_time", "dropped_feature_names"
+    ]
+    for key in mandatory_keys:
+        assert key in data, f"Mandatory key '{key}' is missing from the JSON metrics file"
 
 
-def test_target_preserved_and_ordered():
-    """Verifica che la colonna target sia preservata e nello stesso ordine."""
-    orig = pd.read_csv(ORIG)["target"].reset_index(drop=True)
-    train = pd.read_csv(TRAIN)["target"]
-    test = pd.read_csv(TEST)["target"]
+def test_target_preserved_exactly():
+    """Verify the positional integrity and sequential alignment of the target column."""
+    orig_df = pd.read_csv(ORIG)
+    norm_df = pd.read_csv(NORMALIZED)
 
-    out = pd.concat([train, test], ignore_index=True)
+    # Target column must be explicitly positioned as the very last column
+    assert norm_df.columns[-1] == "target", "Target column is not located in the final position"
 
+    # Ensure that target values sequence remains unshuffled
     pd.testing.assert_series_equal(
-        orig, out, check_names=False,
-        obj="La colonna target non è preservata correttamente"
+        orig_df["target"].reset_index(drop=True),
+        norm_df["target"].reset_index(drop=True),
+        check_names=False,
+        obj="Target row ordering or content values have been corrupted"
     )
 
 
-def test_normalization_mean_std():
-    """Verifica che le feature normalizzate abbiano media ~0 e std ~1."""
-    train = pd.read_csv(TRAIN)
-    test = pd.read_csv(TEST)
+def test_normalization_properties():
+    """Verify that z-score constraints are met globally (mean ~0, std ~1)."""
+    norm_df = pd.read_csv(NORMALIZED)
+    features_df = norm_df.drop(columns=["target"])
 
-    # Unisco train e test per verificare la normalizzazione globale
-    combined = pd.concat(
-        [train.drop(columns=["target"]), test.drop(columns=["target"])],
-        ignore_index=True
-    )
+    for col in features_df.columns:
+        mean = features_df[col].mean()
+        std = features_df[col].std(ddof=0)
 
-    for col in combined.columns:
-        mean = combined[col].mean()
-        std = combined[col].std(ddof=0)  # std popolazione
-
-        assert abs(mean) < 1e-2, f"Mean non ~0 per colonna {col}: {mean}"
-        assert abs(std - 1) < 1e-2, f"Std non ~1 per colonna {col}: {std}"
+        assert abs(mean) < 1e-2, f"Column '{col}' mean deviates significantly from 0 (mean={mean})"
+        # If the column is not constant, check unit variance convergence
+        if std > 1e-4:
+            assert abs(std - 1.0) < 1e-2, f"Column '{col}' standard deviation deviates from 1 (std={std})"
