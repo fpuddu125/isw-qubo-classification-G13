@@ -129,10 +129,10 @@ python3 src/qubo_project/LLM_G13_06_29_001_model.py predict \
 
 GUI:
 ```text
-streamlit run src/qubo_project/gui.py 
+streamlit run src/qubo_project/LLM_G13_06_29_004_gui.py 
 ```
 
 Automatic test:
 ```text
-streamlit run src/qubo_project/!!!DA MODIFICAREgui.py
+pytest -v
 ```
