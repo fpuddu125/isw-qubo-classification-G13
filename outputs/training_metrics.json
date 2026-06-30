@@ -5,8 +5,8 @@
     "target_column": "target",
     "model_path": "model.joblib",
     "n_samples": 140,
-    "n_features": 23,
+    "n_features": 18,
     "target_1_percentage": 50.0,
     "dataset_input_time": 0.0,
-    "training_time": 0.08
+    "training_time": 0.05
 }

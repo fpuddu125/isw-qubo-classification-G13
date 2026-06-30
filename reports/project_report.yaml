@@ -1,0 +1,192 @@
+# ============================================================
+# Template report progetto
+# Classificazione binaria con feature reduction QUBO
+# Formato: YAML
+#
+# Compilare tutti i campi applicabili.
+# Usare null quando un dato non è disponibile.
+# Non inserire qui prompt completi o risposte degli LLM:
+# saranno raccolti in un template separato.
+# Utilizzare l'inglese per le risposte testuali
+# ============================================================
+
+schema_version: "1.0"
+
+group_id: "G13"
+repository_url: "https://github.com/fpuddu125/isw-qubo-classification-G13"
+submission_date: "2026-06-30"
+
+students:
+  - student_id: "60/61/66475"
+    role_in_project:
+      - "preprocessing"
+      - "feature_selection"
+      - "classification"
+      - "testing"
+      - "documentation"
+      - "gui"
+  - student_id: "60/61/66434"
+    role_in_project:
+      - "preprocessing"
+      - "feature_selection"
+      - "classification"
+      - "testing"
+      - "documentation"
+      - "gui"
+
+team_work:
+  work_distribution:
+    design_percent: 100
+    preprocessing_percent: 100
+    qubo_feature_selection_percent: 100
+    classification_percent: 100
+    testing_percent: 100
+    gui_percent: 100
+    documentation_percent: 100
+  collaboration_mode:
+    # valori suggeriti: "pair_programming", "divisione_per_moduli", "mista"
+    type: "pair_programming"
+    notes: "We worked together for the whole project, connected on Discord"
+    remote_collaboration_perc: 100   # Percentuale di lavoro in call (0-100)
+  estimated_total_hours:
+    student_1_hours: 12
+    student_2_hours: 12
+    total_group_hours: 12
+
+initial_context:
+  prior_experience:
+    # valori da usare: "none", "basic", "intermediate", "advanced"
+    python: "basic"
+    pandas_numpy: "none"
+    scikit_learn: "none"
+    machine_learning: "basic"
+    classification: "none"
+    feature_selection: "none"
+    optimization: "none"
+    QUBO: "none"
+    git_github: "intermediate"
+  initial_confidence:
+    # scala 1-5: 1 = per nulla sicuri, 5 = molto sicuri
+    python_project_development: 3
+    qubo_formulation: 2
+    machine_learning: 3
+    debugging: 2
+    validating_llm_outputs: 5
+
+design_choices:
+  correlation_computation: "Spearman"
+  QUBO_optimization_algorithm:
+    algorithm_name: "Simulated Annealing"
+    library_used: "NumPy, Pandas, Math"
+    reason_for_choice: "Selected these three foundational classifiers in collaboration with the LLM"
+  classification_algorithm:
+    algorithm_name: "Random Forest, Logistic Regression, Decision Tree"
+    library_used: "scikit-learn (sklearn)"
+    reason_for_choice: "Selected these three foundational classifiers in collaboration with the LLM"
+  gui_development: "Streamlit"
+  problems_encountered:
+    - problem: "1. Entering the file name to be used in the GUI too mechanical."
+      solution: "1. Insert the drop-down menu."
+  notes:
+
+llm_usage_summary:
+  # Non inserire prompt o risposte complete: saranno raccolti separatamente.
+  llms_used:    # Inserire un record per ogni LLM usato
+    - name: "Copilot"
+      version: "GPT-4"
+      paid_subscription: "No"
+      usage_level_0_to_3:   # valori da 0 (non usato) a 3 (usatissimo)
+        value: 3
+  phases_where_llm_was_used:
+    requirements_understanding:
+      usage_level_0_to_3: 1
+      usefulness_1_to_5: 2
+      notes: "We had already undertstand the requirements by ourself"
+    preprocessing:
+      usage_level_0_to_3: 3
+      usefulness_1_to_5: 5
+      notes: null
+    qubo_formulation:
+      usage_level_0_to_3: 3
+      usefulness_1_to_5: 5
+      notes: null
+    optimizer_selection:
+      usage_level_0_to_3: 3
+      usefulness_1_to_5: 5
+      notes: null
+    classifier_selection:
+      usage_level_0_to_3: 3
+      usefulness_1_to_5: 4
+      notes: null
+    debugging:
+      usage_level_0_to_3: 2
+      usefulness_1_to_5: 5
+      notes: null
+    testing:
+      usage_level_0_to_3: 1
+      usefulness_1_to_5: 5
+      notes: null
+    documentation:
+      usage_level_0_to_3: 2
+      usefulness_1_to_5: 5
+      notes: null
+    gui:
+      usage_level_0_to_3: 3
+      usefulness_1_to_5: 5
+      notes: null
+  estimated_llm_contribution:
+    percent_code_generated_or_suggested_by_llm: 100
+    percent_code_accepted_without_major_changes: 80
+    percent_documentation_generated_or_suggested_by_llm: 30
+  human_verification:
+    # descrivere come il gruppo ha controllato gli output dell'LLM. (yes/partially/no)
+    methods_used:
+      - code_execution: "partially"
+      - automated_tests: "partially"
+      - critical_reading: "no"
+      - comparison_with_other_llm: "no"
+    notes: null
+  llm_misleading_outputs:
+    encountered: "no"  # (yes/partially/no)
+    examples_count: "0"   # number of cases
+    categories:     # rispondere con: yes/partially/no
+      wrong_python_code: "no"
+      wrong_library_usage: "no"
+      wrong_qubo_formulation: "no"
+      wrong_ml_methodology: "no"
+      hallucinated_api_or_function: "no"
+      other: "no"      # indicare quale/quali
+    impact_on_project: "0"   # valori da 0 (nessuno) a 3 (fortissimo)
+  llm_overall_assessment:
+    productivity_improvement_1_to_5: 5
+    learning_support_1_to_5: 5
+    risk_of_overreliance_1_to_5: 4
+    trust_in_llm_outputs_1_to_5: 4
+    would_use_again: "yes"   # (yes/maybe/no)
+    notes: null
+  most_useful_project_activity: "QUBO Formulation"
+  most_difficult_project_activity: "Preprocessing"
+  main_lessons_learned:   # descrivere con una frase per ogni lezione appresa
+    - "Streamlit GUI, improved Python skills"
+  main_problems:
+    - problem: "1. An error occured when LLM generated an automatic test. 
+    2. An other error occured when we do the final test of the project with another dataset"
+      severity_1_to_5: 4
+      how_resolved: "1. LLM resolved the problem in the automatic test.
+      2. LLM resolved the problem replacing the broken part of the code"
+
+
+final_results:   # descrivere con una frase per ogni elemento che ritenete di citare
+  what_worked_well:
+    - null
+  what_did_not_work_well:
+    - null
+  main_benefit_of_using_llm: "Writing with extreme speed"
+  main_problem_of_using_llm: "Sometimes can generates incorrect code"
+  surprising_findings:
+    - null
+  limitations_of_the_solution:
+    - null
+  threats_to_validity_from_team_perspective:
+    - null
+

@@ -7,4 +7,4 @@ paid_subscription_used: false
 second_llm_used: ""
 third_llm_used: ""
 notes: "Il gruppo ha utilizzato Copilot"
-project_finished: "false"    # Mettere "true" se consegnato
+project_finished: "false"
