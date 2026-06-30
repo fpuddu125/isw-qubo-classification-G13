@@ -86,6 +86,7 @@ def fit_normalize(input_csv: str, target_column: str, normalized_csv: str, outIn
     processing_time = end_time - start_time
 
     stats_json = {
+        "input_file_path": input_csv,
         "n_input_features": n_input_features,
         "n_kept_features": n_kept_features,
         "dataset_size": dataset_size,

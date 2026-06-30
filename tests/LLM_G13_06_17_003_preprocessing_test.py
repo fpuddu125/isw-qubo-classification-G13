@@ -3,8 +3,7 @@ import json
 import pandas as pd
 import numpy as np
 
-# Standardized project paths matching Section 12 outputs structure
-ORIG = "data/input_dataset.csv"
+# Percorsi standard del progetto (struttura Section 12)
 NORMALIZED = "outputs/normalized.csv"
 JSON_STATS = "outputs/preprocessing_result.json"
 
@@ -29,14 +28,23 @@ def test_json_structure_and_keys():
 
 
 def test_target_preserved_exactly():
-    """Verify the positional integrity and sequential alignment of the target column."""
-    orig_df = pd.read_csv(ORIG)
+    """Verify the positional integrity and sequential alignment of the target column dynamically."""
+    # 1. Carica il JSON per estrarre il percorso del dataset usato dinamicamente
+    with open(JSON_STATS, "r") as f:
+        stats_data = json.load(f)
+
+    # Recupera il percorso dinamico salvato nello script.
+    # Se la chiave non esiste, cerca di usare un fallback o lancia un errore chiaro.
+    assert "input_file_path" in stats_data, "La chiave 'input_file_path' non è presente nel file JSON dei risultati"
+    dynamic_orig_path = stats_data["input_file_path"]
+
+    orig_df = pd.read_csv(dynamic_orig_path)
     norm_df = pd.read_csv(NORMALIZED)
 
-    # Target column must be explicitly positioned as the very last column
+    # Il target deve essere tassativamente l'ultima colonna del file normalizzato
     assert norm_df.columns[-1] == "target", "Target column is not located in the final position"
 
-    # Ensure that target values sequence remains unshuffled
+    # Verifica l'allineamento sequenziale delle righe basandosi sul dataset reale caricato
     pd.testing.assert_series_equal(
         orig_df["target"].reset_index(drop=True),
         norm_df["target"].reset_index(drop=True),
@@ -55,6 +63,6 @@ def test_normalization_properties():
         std = features_df[col].std(ddof=0)
 
         assert abs(mean) < 1e-2, f"Column '{col}' mean deviates significantly from 0 (mean={mean})"
-        # If the column is not constant, check unit variance convergence
+        # Se la colonna non è costante, verifica la convergenza a varianza unitaria
         if std > 1e-4:
             assert abs(std - 1.0) < 1e-2, f"Column '{col}' standard deviation deviates from 1 (std={std})"

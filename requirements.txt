@@ -1,6 +1,7 @@
-# Runtime requirements for the QUBO classification project
-# Python >= 3.11
-# Pandas
-# NumPy
-# SciPy
-
+numpy==2.4.6
+pandas==3.0.3
+scikit-learn==1.9.0
+scipy==1.17.1
+joblib==1.5.3
+pytest==9.1.0
+streamlit
